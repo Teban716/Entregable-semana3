@@ -11,36 +11,6 @@ def pedir_numero_positivo(prompt):
         except ValueError:
             print("El numero es invalido")
 
-def menu_principal():
-    print("1. Agregar productos")
-    print("2. Consultar productos")
-    print("3. Actualizar precios")
-    print("4. Eliminar productos")
-    print("5. Inventario total")
-    print("6. Salir")
-    opcion = input('Elige lo que deseas realizar:    ')
-    if opcion == '1':
-        agregar_producto()
-        menu_principal()
-    elif opcion == '2':
-        consultar_productos()
-        menu_principal()
-    elif opcion == '3':
-        actualizar_precios()
-        menu_principal()
-    elif opcion == '4':
-        eliminar_productos()
-        menu_principal()
-    elif opcion == '5':
-        calcular_valor_total_iventario()
-        menu_principal()
-    elif opcion == "6":
-        SystemExit
-    else:
-        print('Numero Invalido')
-        print('-----------------------------------------------')
-        menu_principal()
-
 def agregar_producto():
     producto = obtener_producto()
     inventario.append(producto)
@@ -79,5 +49,34 @@ def calcular_valor_total_iventario():
         calculadora = calculadora + producto['Precio']  
     print (calculadora)
 
+
+def menu_principal():
+    while True:
+        print('-----------------------------------------------')
+        print("1. Agregar productos")
+        print("2. Consultar productos")
+        print("3. Actualizar precios")
+        print("4. Eliminar productos")
+        print("5. Inventario total")
+        print("6. Salir")
+        print('-----------------------------------------------')
+        opcion = input('Elige lo que deseas realizar:    ')
+        print('-----------------------------------------------')
+        if opcion == '1':
+            agregar_producto()
+        elif opcion == '2':
+            consultar_productos()
+        elif opcion == '3':
+            actualizar_precios()
+        elif opcion == '4':
+            eliminar_productos()
+        elif opcion == '5':
+            calcular_valor_total_iventario()
+        elif opcion == "6":
+            break
+        else:
+            print('Numero Invalido')
+            print('-----------------------------------------------')
+        
 menu_principal()
     
