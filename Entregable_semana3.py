@@ -64,19 +64,26 @@ def menu_principal():
         print('-----------------------------------------------')
         if opcion == '1':
             agregar_producto()
+            print('-----------------------------------------------')
+            print("PRODUCTO AGREGADO")
         elif opcion == '2':
+            print('-----------------------------------------------')
+            print("INVENTARIO")
             consultar_productos()
         elif opcion == '3':
             actualizar_precios()
+            print('-----------------------------------------------')
+            print("PRECIO ACTUALIZADO")
         elif opcion == '4':
             eliminar_productos()
+            print('-----------------------------------------------')
+            print("PRODUCTO ELIMINADO")
         elif opcion == '5':
             calcular_valor_total_iventario()
         elif opcion == "6":
             break
         else:
             print('Numero Invalido')
-            print('-----------------------------------------------')
         
 menu_principal()
     
