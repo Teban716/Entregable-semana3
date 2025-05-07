@@ -16,12 +16,14 @@ def agregar_producto():
     inventario.append(producto)
 
 def obtener_producto():
-    nombre_producto = input("Producto:    ")
-    precio = pedir_numero_positivo("Precio:  ")
+    nombre_producto = input("Producto:")
+    precio = pedir_numero_positivo("Precio:  $")
+    cantidad_disponible = pedir_numero_positivo("Cantidad Disponible:   ")
 
     producto = {
-        'Nombre':nombre_producto,
-        'Precio':precio
+            'Nombre':nombre_producto,
+            'Precio':precio,
+            'Cantidad Disponible':cantidad_disponible
     }
     
     return producto
