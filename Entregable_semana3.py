@@ -7,9 +7,9 @@ def pedir_numero_positivo(prompt):
             if numero > 0:
                 return numero
             else:
-                print("El numero no es positivo")
+                print("\nEl numero no es positivo \n")
         except ValueError:
-            print("El numero es invalido")
+            print("\nEl numero es invalido \n")
 
 def pedir_numero_entero_positivo(prompt):
     while(True):
@@ -18,9 +18,9 @@ def pedir_numero_entero_positivo(prompt):
             if numero > 0:
                 return numero
             else:
-                print("El numero no es positivo")
+                print("\nEl numero no es positivo \n")
         except ValueError:
-            print("El numero es invalido")
+            print("\nEl numero es invalido \n")
 
 def agregar_producto():
     producto = obtener_producto()
@@ -61,15 +61,19 @@ def eliminar_productos():
             inventario.remove(producto)
 
 def calcular_valor_total_iventario():
-    for producto in inventario:
-        multiplicacion = lambda inventario:({(inventario[producto]['Precio'])*(inventario[producto]['Cantidad Disponible'])})()
-        
+    multiplicacion = lambda p, c : p * c
+    total = 0
+    for i in inventario:
+      sum = multiplicacion(i['Precio'],i['Cantidad Disponible'])
+      total += sum
+    print(f"\VALOR TOTAL DEL INVENTARIO \n${total}")
+    #SIN LAMBDA
     # calculadora = 0
     # for producto in inventario:
     #     calculadora = calculadora + ((producto['Precio'])*(producto['Cantidad Disponible']))  
     # print(f"VALOR TOTAL DEL INVENTARIO \n${calculadora}")
-    print(inventario)
-def menu_principal():
+    # print(total)
+def visualizar_menu_principal():
     while True:
         print('-----------------------------------------------')
         print("1. Agregar productos")
@@ -104,5 +108,5 @@ def menu_principal():
         else:
             print('Numero Invalido')
         
-menu_principal()
+visualizar_menu_principal()
     
