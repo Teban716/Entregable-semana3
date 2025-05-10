@@ -1,6 +1,4 @@
-inventory = {
-    "Panela": (5000, 5)
-}
+inventory = {}
 
 def pedir_numero_float_positivo(prompt):
     while(True):
@@ -9,9 +7,9 @@ def pedir_numero_float_positivo(prompt):
             if numero > 0:
                 return numero
             else:
-                print("\nEl numero no es positivo \n")
+                print("\n||El numero no es positivo|| \n")
         except ValueError:
-            print("\nEl numero es invalido \n")
+            print("\n||El numero es invalido|| \n")
 
 def pedir_numero_entero_positivo(prompt):
     while(True):
@@ -20,9 +18,9 @@ def pedir_numero_entero_positivo(prompt):
             if numero > 0:
                 return numero
             else:
-                print("\nEl numero no es positivo \n")
+                print("\n||El numero no es positivo|| \n")
         except ValueError:
-            print("\nEl numero es invalido \n")
+            print("\n||El numero es invalido|| \n")
     
 def imprimir_fila(producto, precio, cantidad):
     print('{:<12}  {:<12}  {:<12}'.format(producto, precio, cantidad) )
@@ -35,7 +33,7 @@ def agregar_producto():
 def obtener_producto():
     nombre_producto = input("Producto:")
     if nombre_producto in inventory:
-        print("||\nEl producto ya esta en el inventario||")
+        print("\n||El producto ya esta en el inventario||")
         return None
 
     precio = pedir_numero_float_positivo("Precio:  $")
@@ -45,7 +43,7 @@ def obtener_producto():
 
 def consultar_productos():
     if len(inventory) == 0:
-        print("El inventario esta vacio")
+        print("||EL INVENTARIO ESTA VACIO||")
     else:
         print("\n               INVENTARIO\n")
         imprimir_fila("PRODUCTO","PRECIO","CANTIDAD")
@@ -64,14 +62,14 @@ def actualizar_precios():
     nombre_producto = input("Producto:")
     
     if nombre_producto not in inventory:
-        print("\nEL PRODUCTO NO ESTA EN EL INVENTARIO")
+        print("\n||EL PRODUCTO NO ESTA EN EL INVENTARIO||")
         return
     
     precio = pedir_numero_float_positivo("Precio:  $")
     cantidad_disponible = (pedir_numero_entero_positivo("Cantidad Disponible:   "))
     
     if len(inventory) == 0:
-        print("\nEL INVENTARIO ESTA VACIO")
+        print("\n||EL INVENTARIO ESTA VACIO||")
         return
     
     inventory [nombre_producto] = (precio, cantidad_disponible)
@@ -79,7 +77,7 @@ def actualizar_precios():
 def eliminar_productos():
     nombre_producto=input("Producto a eliminar: ")
     if nombre_producto not in inventory:
-        print("\nEl producto no esta en el inventario")
+        print("\n||EL PRODUCTO NO ESTA EN EL INVENTARIO||")
         return
     del inventory[nombre_producto]
     print("\nPRODUCTO ELIMINADO")
