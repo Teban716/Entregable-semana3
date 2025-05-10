@@ -1,6 +1,8 @@
-inventario=[]
+inventory = {
+    "Panela": (5000, 5)
+}
 
-def pedir_numero_positivo(prompt):
+def pedir_numero_float_positivo(prompt):
     while(True):
         try:
             numero = float(input(prompt))
@@ -21,58 +23,76 @@ def pedir_numero_entero_positivo(prompt):
                 print("\nEl numero no es positivo \n")
         except ValueError:
             print("\nEl numero es invalido \n")
+    
+def imprimir_fila(producto, precio, cantidad):
+    print('{:<12}  {:<12}  {:<12}'.format(producto, precio, cantidad) )
 
 def agregar_producto():
     producto = obtener_producto()
-    inventario.append(producto)
+    if producto != None:
+        inventory.update(producto)
 
 def obtener_producto():
     nombre_producto = input("Producto:")
-    precio = pedir_numero_positivo("Precio:  $")
+    if nombre_producto in inventory:
+        print("||\nEl producto ya esta en el inventario||")
+        return None
+
+    precio = pedir_numero_float_positivo("Precio:  $")
     cantidad_disponible = (pedir_numero_entero_positivo("Cantidad Disponible:   "))
-    
-    producto = {
-            'Nombre':nombre_producto,
-            'Precio':precio,
-            'Cantidad Disponible':(cantidad_disponible)
-    }
-    
-    return producto
+    print("PRODUCTO AGREGADO")
+    return { nombre_producto: (precio, cantidad_disponible) }
 
 def consultar_productos():
-    if len(inventario) == 0:
+    if len(inventory) == 0:
         print("El inventario esta vacio")
     else:
-        print(f"CONSULTAR PRODUCTOS \n${inventario}")
-    
+        print("\n               INVENTARIO\n")
+        imprimir_fila("PRODUCTO","PRECIO","CANTIDAD")
+        print("_______________________________________________\n")
+        for nombre, value in inventory.items():
+            precio = value[0]
+            cantidad = value[1]
+            imprimir_fila(nombre,precio,cantidad)
+
+def agregar_producto_actualizado():
+    producto = actualizar_precios()
+    if producto != None:
+        inventory.update(producto)
+
 def actualizar_precios():
-    producto_actualizar = obtener_producto()
-    if len(inventario) == 0:
-        print("El inventario esta vacio")
-    else:
-        for i, producto in enumerate(inventario):
-            if producto['Nombre'] == producto_actualizar['Nombre']:
-                inventario[i] = producto_actualizar
+    nombre_producto = input("Producto:")
+    
+    if nombre_producto not in inventory:
+        print("\nEL PRODUCTO NO ESTA EN EL INVENTARIO")
+        return
+    
+    precio = pedir_numero_float_positivo("Precio:  $")
+    cantidad_disponible = (pedir_numero_entero_positivo("Cantidad Disponible:   "))
+    
+    if len(inventory) == 0:
+        print("\nEL INVENTARIO ESTA VACIO")
+        return
+    
+    inventory [nombre_producto] = (precio, cantidad_disponible)
 
 def eliminar_productos():
     nombre_producto=input("Producto a eliminar: ")
-    for producto in inventario:
-        if producto['Nombre'] == nombre_producto:
-            inventario.remove(producto)
+    if nombre_producto not in inventory:
+        print("\nEl producto no esta en el inventario")
+        return
+    del inventory[nombre_producto]
+    print("\nPRODUCTO ELIMINADO")
 
 def calcular_valor_total_iventario():
     multiplicacion = lambda p, c : p * c
     total = 0
-    for i in inventario:
-      sum = multiplicacion(i['Precio'],i['Cantidad Disponible'])
-      total += sum
-    print(f"\VALOR TOTAL DEL INVENTARIO \n${total}")
-    #SIN LAMBDA
-    # calculadora = 0
-    # for producto in inventario:
-    #     calculadora = calculadora + ((producto['Precio'])*(producto['Cantidad Disponible']))  
-    # print(f"VALOR TOTAL DEL INVENTARIO \n${calculadora}")
-    # print(total)
+    for _,j in inventory.items():
+        p,c=j
+        sum = multiplicacion(p,c)
+        total += sum
+    print(f"\nVALOR TOTAL DEL INVENTARIO \n${total:,}")
+
 def visualizar_menu_principal():
     while True:
         print('-----------------------------------------------')
@@ -83,30 +103,25 @@ def visualizar_menu_principal():
         print("5. Valor total del Inventario")
         print("6. Salir")
         print('-----------------------------------------------')
-        opcion = input('Elige lo que deseas realizar:    ')
+        opcion = input('Opcion:    ')
         print('-----------------------------------------------')
         if opcion == '1':
             agregar_producto()
             print('-----------------------------------------------')
-            print("PRODUCTO AGREGADO")
         elif opcion == '2':
             print('-----------------------------------------------')
-            print("INVENTARIO")
             consultar_productos()
         elif opcion == '3':
             actualizar_precios()
             print('-----------------------------------------------')
-            print("PRECIO ACTUALIZADO")
         elif opcion == '4':
             eliminar_productos()
             print('-----------------------------------------------')
-            print("PRODUCTO ELIMINADO")
         elif opcion == '5':
             calcular_valor_total_iventario()
         elif opcion == "6":
             break
         else:
             print('Numero Invalido')
-        
+
 visualizar_menu_principal()
-    
